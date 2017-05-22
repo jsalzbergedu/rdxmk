@@ -79,3 +79,18 @@ of FILE in the current directory, suitable for creation"
    (get-buffer-create "*Cookbook Output*")
    (get-buffer "*Cookbook Output*"))) 
   
+(define-minor-mode redox-mode
+  "Redox mode a hook for working with redox projects."
+  nil ;; redox-mode is must be set true to be on
+  nil ;; redox-mode does not display anything in the mode line
+  nil) ;; redox-mode does not have a keymap
+  
+(defun redox-togg-cond ()
+  "Toggles redox-mode on if a file being visited is under redox/."
+  (if (string-match
+       (regexp-quote "redox/")
+       default-directory)
+     (redox-mode 1) 
+    (redox-mode 0)))
+
+(add-hook 'text-mode-hook 'redox-togg-cond)
