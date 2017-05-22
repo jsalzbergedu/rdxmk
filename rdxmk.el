@@ -55,7 +55,8 @@ of FILE in the current directory, suitable for creation"
    (get-buffer "*Redox Build Output*"))) 
 
 (defun cookbook (package op)
-  "Runs cookbook.sh with the specified package and option. Options include the following:
+  "Runs cookbook.sh with the specified package and option.
+  Options include the following:
   dist
   distclean
   build
