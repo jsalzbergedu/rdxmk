@@ -1,4 +1,5 @@
-This is rdxmk.info, produced by makeinfo version 6.3 from info.txt.
+This is rdxmk.info, produced by makeinfo version 6.3 from
+rdxmkinfo.texi.
 
 This manual is for rdxmk, version 0.01.  Copyright (C) 2017 J.
 Salzberg.
@@ -49,10 +50,20 @@ File: rdxmk.info,  Node: Redox mode,  Next: GNU Free Documentation License,  Pre
 
 A minor mode run whenever a text file is opened inside a redox
 project.  You can flip it on and off manually, but I don't see any
-uses for that.  Currently just exists so there is a hook for people to
-do cool stuff with.  Perhaps you could use it to bind keys for using
-the make/build stuff, but no keys are bound so as to not conflict with
-anyone else's setups.
+uses for that.  This currently exists for two reasons: firstly to give
+people an option to conditionally stop emacs from messing up the redox
+build system, and secondly so there is a hook for people to do cool
+stuff with.
+
+   For the first purpose, do 'M-x customize-group RET rdxmk RET' and
+set lockfile no pollute to non-nil.  Now whenever you open a file in
+redox, it wont insert lockfiles everywhere.  However, to get lockfiles
+in other locations, you must manually 'M-x set-variable RET
+create-lockfiles RET t RET' to reset it to t.  It stinks.
+
+   Perhaps you could use it to bind keys for using the make/build
+stuff, but no keys are bound so as to not conflict with anyone else's
+setups.
 
 
 File: rdxmk.info,  Node: GNU Free Documentation License,  Prev: Redox mode,  Up: Top
@@ -549,9 +560,9 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top559
-Node: Make and Cookbook816
-Node: Redox mode1466
-Node: GNU Free Documentation License1971
+Node: Top565
+Node: Make and Cookbook822
+Node: Redox mode1472
+Node: GNU Free Documentation License2439
 
 End Tag Table

@@ -66,7 +66,11 @@ Run @command{M-x make-narg RET} to go up to the root makefile and run make witho
 @pindex Redox Mode
 @cindex Redox mode
 
-A minor mode run whenever a text file is opened inside a redox project. You can flip it on and off manually, but I don't see any uses for that. Currently just exists so there is a hook for people to do cool stuff with. Perhaps you could use it to bind keys for using the make/build stuff, but no keys are bound so as to not conflict with anyone else's setups.
+A minor mode run whenever a text file is opened inside a redox project. You can flip it on and off manually, but I don't see any uses for that. This currently exists for two reasons: firstly to give people an option to conditionally stop emacs from messing up the redox build system, and secondly so there is a hook for people to do cool stuff with.
+
+For the first purpose, do @command{M-x customize-group RET rdxmk RET} and set lockfile no pollute to non-nil. Now whenever you open a file in redox, it wont insert lockfiles everywhere. However, to get lockfiles in other locations, you must manually @command{M-x set-variable RET create-lockfiles RET t RET} to reset it to t. It stinks.
+
+Perhaps you could use it to bind keys for using the make/build stuff, but no keys are bound so as to not conflict with anyone else's setups.
 
 @node GNU Free Documentation License
 @appendix GNU Free Documentation License

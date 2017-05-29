@@ -80,7 +80,7 @@ of FILE in the current directory, suitable for creation"
    (get-buffer "*Cookbook Output*"))) 
   
 (define-minor-mode redox-mode
-  "Redox mode a hook for working with redox projects."
+  "Redox mode - adds a hook for working with redox projects."
   nil ;; redox-mode is must be set true to be on
   nil ;; redox-mode does not display anything in the mode line
   nil) ;; redox-mode does not have a keymap
@@ -94,3 +94,19 @@ of FILE in the current directory, suitable for creation"
     (redox-mode 0)))
 
 (add-hook 'text-mode-hook 'redox-togg-cond)
+(add-hook 'after-change-major-mode-hook 'redox-togg-cond)
+
+(defgroup rdxmk nil "rdxmk's customization group")
+
+(defcustom lockfile-no-pollute nil
+  "If non nil, stops emacs from making lockfiles which can mess up redox' build system." 
+  :type '(boolean :tag "backup-no-pollute" lockfile-no-pollute)
+  :group 'rdxmk)
+
+(defun depollute-cond ()
+  "If lockfile-no-pollute is t, sets create-lockfiles to nil when redox-mode is run"
+  (if (lockfile-no-pollute)
+      (setq create-lockfiles nil)
+    ()))
+
+(add-hook 'redox-mode 'depollute-cond)
