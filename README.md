@@ -8,4 +8,9 @@ Clone this repo in your .emacs.d, then add the following in your .emacs:
 (add-to-list 'load-path "~/.emacs.d/rdxmk")
 (load "rdxmk")
 ```
-Ta-daaa!
+To install the docfiles, run
+```bash
+sudo install-info ~/.emacs.d/rdxmk/rdxmk.info /usr/share/info/dir
+```
+
+Happy redoxing!
