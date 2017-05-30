@@ -1,5 +1,5 @@
 ;;(require 'cl) ;; Make sure to uncomment this line if you don't have it already
-
+(push "~/.emacs.d/rdxmk/" Info-directory-list)
 ;; I honestly have no idea how the following function works. I've seen it on the emacs wiki and stackoverflow,
 ;; where people used it to have their compile find the root makefile
 (defun* get-closest-pathname (&optional (file "Makefile"))

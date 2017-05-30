@@ -12,6 +12,10 @@ Salzberg.
      included in the section entitled
 
      "GNU Free Documentation License".
+INFO-DIR-SECTION Emacs
+START-INFO-DIR-ENTRY
+* rdxmk: (rdxmk).       A small set of tools for redox development in Gnu Emacs
+END-INFO-DIR-ENTRY
 
 
 File: rdxmk.info,  Node: Top,  Next: Make and Cookbook,  Up: (dir)
@@ -560,9 +564,9 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top565
-Node: Make and Cookbook822
-Node: Redox mode1472
-Node: GNU Free Documentation License2439
+Node: Top708
+Node: Make and Cookbook965
+Node: Redox mode1615
+Node: GNU Free Documentation License2582
 
 End Tag Table

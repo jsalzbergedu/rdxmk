@@ -3,6 +3,10 @@
 @settitle rdxmk 0.01
 @setfilename rdxmk.info
 
+@dircategory Emacs
+@direntry
+* rdxmk: (rdxmk).       A small set of tools for redox development in Gnu Emacs
+@end direntry
 
 @copying
 This manual is for rdxmk, version 0.01.
