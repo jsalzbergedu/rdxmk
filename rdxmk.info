@@ -61,9 +61,10 @@ stuff with.
 
    For the first purpose, do 'M-x customize-group RET rdxmk RET' and
 set lockfile no pollute to non-nil.  Now whenever you open a file in
-redox, it wont insert lockfiles everywhere.  However, to get lockfiles
-in other locations, you must manually 'M-x set-variable RET
-create-lockfiles RET t RET' to reset it to t.  It stinks.
+redox, it wont insert lockfiles, backups, and auto-saves everywhere.
+However, to get lockfiles in other locations, you must manually 'M-x
+set-variable RET create-lockfiles RET t RET' to reset it to t.  It
+stinks.
 
    Perhaps you could use it to bind keys for using the make/build
 stuff, but no keys are bound so as to not conflict with anyone else's
@@ -567,6 +568,6 @@ Tag Table:
 Node: Top708
 Node: Make and Cookbook965
 Node: Redox mode1615
-Node: GNU Free Documentation License2582
+Node: GNU Free Documentation License2606
 
 End Tag Table

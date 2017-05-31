@@ -99,14 +99,16 @@ of FILE in the current directory, suitable for creation"
 (defgroup rdxmk nil "rdxmk's customization group")
 
 (defcustom lockfile-no-pollute nil
-  "If non nil, stops emacs from making lockfiles which can mess up redox' build system." 
+  "If non nil, stops emacs from making lockfiles when redox-mode hook is run and stops emacs from making auto saves and backups, which can all mess up redox' build system." 
   :type '(boolean :tag "backup-no-pollute" lockfile-no-pollute)
   :group 'rdxmk)
 
 (defun depollute-cond ()
-  "If lockfile-no-pollute is t, sets create-lockfiles to nil when redox-mode is run"
+  "If lockfile-no-pollute is t, inhibits backups for the buffer and sets create-lockfiles and auto-save-default to nil when redox-mode is run"
   (if (lockfile-no-pollute)
-      (setq create-lockfiles nil)
+      ((setq create-lockfiles nil)
+       (setq auto-save-default nil)
+       (set (make-local-variable 'backup-inhibited) t))
     ()))
 
 (add-hook 'redox-mode 'depollute-cond)
