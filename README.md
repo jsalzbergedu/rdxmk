@@ -13,4 +13,6 @@ To install the docfiles, run
 sudo install-info ~/.emacs.d/rdxmk/rdxmk.info /usr/share/info/dir
 ```
 
+For faster load times, run `C-u M-x byte-recompile-directory RET ~/.emacs.d/rdxmk/ RET`
+
 Happy redoxing!
