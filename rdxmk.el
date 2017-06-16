@@ -24,20 +24,33 @@
 
 ;;(require 'cl) ;; Make sure to uncomment this line if you don't have it already
 (push "~/.emacs.d/rdxmk/" Info-directory-list)
-;; I honestly have no idea how the following function works. I've seen it on the emacs wiki and stackoverflow,
-;; where people used it to have their compile find the root makefile
-(defun* get-closest-pathname (&optional (file "Makefile"))
-  "Determine the pathname of the first instance of FILE starting from the current directory towards root.
-This may not do the correct thing in presence of links. If it does not find FILE, then it shall return the name
-of FILE in the current directory, suitable for creation"
-  (let ((root (expand-file-name "/"))) 
-    (expand-file-name file
-		      (loop 
-			for d = default-directory then (expand-file-name ".." d)
-			if (file-exists-p (expand-file-name file d))
-			return d
-			if (equal d root)
-			return nil))))
+
+(defun up-a-dir (dir)
+  "Helper function to return the directory one up from DIR."
+  ;; As far as I can tell, this is the idiomatic way to
+  ;; "traverse a filesystem tree," even though the built in
+  ;; docs have those two functions in switched places.
+  (file-name-directory (directory-file-name dir)))
+
+
+(defun recurse-for-file (file dir)
+  "Calls itself until it runs into FILE or until DIR has a length of 1.
+If DIR has a length of 1 and FILE is not found, returns nil.
+If FILE is found, returns the directory and file."
+  (if (= (length dir) 1)
+      (if (file-exists-p (expand-file-name file dir))
+	  (expand-file-name file dir)
+	())
+    (if (file-exists-p (expand-file-name file dir))
+	(expand-file-name file dir)
+      (recurse-for-file file (up-a-dir dir)))))
+
+(defun get-closest-pathname (&optional file)
+ "By default, searches for the nearest makefile, recursivley going up to parent directories.
+If FILE is specified, searches for FILE in the same way."
+ (if file
+     (recurse-for-file file default-directory) ; recurse until it finds FILE goes here
+     (recurse-for-file "Makefile" default-directory))) ; recurse until it finds Makefile goes here
 
 (defun make-qemu ()
   "Go up to the root makefile of the redox project, run make qemu."

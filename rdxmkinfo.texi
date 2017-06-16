@@ -1,6 +1,6 @@
 \input texinfo
 @c -*-texinfo-*-
-@settitle rdxmk 0.01
+@settitle rdxmk 0.10
 @setfilename rdxmk.info
 
 @dircategory Emacs
@@ -9,7 +9,7 @@
 @end direntry
 
 @copying
-This manual is for rdxmk, version 0.01.
+This manual is for rdxmk, version 0.10.
 Copyright @copyright{} 2017 J. Salzberg.
 
 @quotation
@@ -44,9 +44,9 @@ Published by J. Salzberg.
 
 @ifnottex
 @node Top
-@top rdxmk 0.01
+@top rdxmk 0.10
 
-This manual is for rdxmk, version 0.01.
+This manual is for rdxmk, version 0.10.
 @end ifnottex
 
 @menu

@@ -1,7 +1,7 @@
 This is rdxmk.info, produced by makeinfo version 6.3 from
 rdxmkinfo.texi.
 
-This manual is for rdxmk, version 0.01.  Copyright (C) 2017 J.
+This manual is for rdxmk, version 0.10.  Copyright (C) 2017 J.
 Salzberg.
 
      Permission is granted to copy, distribute and/or modify this
@@ -20,10 +20,10 @@ END-INFO-DIR-ENTRY
 
 File: rdxmk.info,  Node: Top,  Next: Make and Cookbook,  Up: (dir)
 
-rdxmk 0.01
+rdxmk 0.10
 **********
 
-This manual is for rdxmk, version 0.01.
+This manual is for rdxmk, version 0.10.
 
 * Menu:
 
