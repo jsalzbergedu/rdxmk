@@ -1,5 +1,12 @@
 ;;; rdxmk.el --- A small set of tools for redox development in Gnu Emacs
 
+;; Copyright (C) 2017 Jacob Salzberg
+
+;; Author: Jacob Salzberg <jsalzbergedu@yahoo.com>
+;; Version: 0.10
+;; Keywords: redox
+;; URL: https://github.com/jsalzbergedu/rdxmk
+
 ;;; Commentary:
 
 ;; rdxmk provides a few tools to make redox development easier in Emacs.
@@ -23,7 +30,6 @@
 ;;; Code:
 
 ;;(require 'cl) ;; Make sure to uncomment this line if you don't have it already
-(push "~/.emacs.d/rdxmk/" Info-directory-list)
 
 (defun up-a-dir (dir)
   "Helper function to return the directory one up from DIR."
@@ -114,7 +120,7 @@ If FILE is specified, searches for FILE in the same way."
     (substring (get-closest-pathname "Makefile") 0 -8) "/cookbook/cook.sh " package " " op " &")
    (get-buffer-create "*Cookbook Output*")
    (get-buffer "*Cookbook Output*"))) 
-  
+
 (define-minor-mode redox-mode
   "Redox mode - adds a hook for working with redox projects."
   nil ;; redox-mode is must be set true to be on
@@ -132,6 +138,7 @@ If FILE is specified, searches for FILE in the same way."
 (add-hook 'text-mode-hook 'redox-togg-cond)
 (add-hook 'after-change-major-mode-hook 'redox-togg-cond)
 
+;;;###autoload
 (defgroup rdxmk nil
   "rdxmk's customization group"
   :group 'programming)
