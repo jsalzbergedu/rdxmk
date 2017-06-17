@@ -147,7 +147,7 @@ version"
   :group 'programming)
 
 (defcustom rdxmk-lockfile-no-pollute nil
-  "If non nil, stop Emacs from making lockfiles when `rdxmk-redox-mode-hook` is run and stop Emacs from making auto saves and backups, which all can mess up redox' build system."
+  "If non nil, tells the user to turn off lockfiles when `rdxmk-redox-mode-hook` is run and to stop Emacs from making auto saves and backups, which all can mess up redox' build system."
   :group 'rdxmk
   :type 'boolean)
 
@@ -159,7 +159,7 @@ Otherwise, returns nil."
     '()))
 
 (defun rdxmk-depollute-cond ()
-  "If `rdxmk-lockfile-no-pollute` is t, inhibit backups for the buffer and set `create-lockfiles` and `auto-save-default` to nil when `rdxmk-redox-mode` is run."
+  "If `rdxmk-lockfile-no-pollute` is t, inhibit backups for the buffer, set `auto-save-default` to nil, and tell the user to set `create-lockfiles` to nil when `rdxmk-redox-mode` is run."
   (if rdxmk-lockfile-no-pollute
       (progn
 	(rdxmk-reminder-message)
