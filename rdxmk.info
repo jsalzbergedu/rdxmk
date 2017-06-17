@@ -37,14 +37,15 @@ File: rdxmk.info,  Node: Make and Cookbook,  Next: Redox mode,  Prev: Top,  Up: 
 1 Make and Cookbook
 *******************
 
-Run 'M-x make-narg RET' to go up to the root makefile and run make
-without arguments, 'M-x make-warg RET' to go up to the root makefile
-and run make with the specified arguments, 'M-x make-qemu RET' to go
-up to the root makefile and run make qemu, and 'M-x cookbook RET' to
-run cookbook with the specified package and options.  All of these can
-be run from a buffer on a file anywhere in the redox project, as long
-as the root redox project has not been renamed and as long as you
-haven't manually 'cd'd to another file.
+Run 'M-x rdxmk-make-narg RET' to go up to the root makefile and run
+make without arguments, 'M-x rdxmk-make-warg RET' to go up to the root
+makefile and run make with the specified arguments, 'M-x
+rdxmk-make-qemu RET' to go up to the root makefile and run make qemu,
+and 'M-x rdxmk-cookbook RET' to run cookbook with the specified
+package and options.  All of these can be run from a buffer on a file
+anywhere in the redox project, as long as the root redox project has
+not been renamed and as long as you haven't manually 'cd'd to another
+file.
 
 
 File: rdxmk.info,  Node: Redox mode,  Next: GNU Free Documentation License,  Prev: Make and Cookbook,  Up: Top
@@ -61,14 +62,17 @@ stuff with.
 
    For the first purpose, do 'M-x customize-group RET rdxmk RET' and
 set lockfile no pollute to non-nil.  Now whenever you open a file in
-redox, it wont insert lockfiles, backups, and auto-saves everywhere.
-However, to get lockfiles in other locations, you must manually 'M-x
-set-variable RET create-lockfiles RET t RET' to reset it to t.  It
-stinks.
+redox, it wont insert backups and auto-saves everywhere.  However, it
+does not set create-lockfiles to nil, because that is a variable that
+should be changed using customize ('M-x customize-group RET files
+RET').  If create lockfiles is non nil, and you have set lockfile no
+pollute to non nil, it will display a message at the bottom of the
+screen to remind you to turn it off.  I'd reccomend just setting it
+for the current session, as lockfiles are nice for other projects.
 
-   Perhaps you could use it to bind keys for using the make/build
-stuff, but no keys are bound so as to not conflict with anyone else's
-setups.
+   Perhaps you could use rdxmk-redox-mode to bind keys for using the
+make/build stuff, but no keys are bound so as to not conflict with
+anyone else's setups.
 
 
 File: rdxmk.info,  Node: GNU Free Documentation License,  Prev: Redox mode,  Up: Top
@@ -567,7 +571,7 @@ permit their use in free software.
 Tag Table:
 Node: Top708
 Node: Make and Cookbook965
-Node: Redox mode1615
-Node: GNU Free Documentation License2606
+Node: Redox mode1639
+Node: GNU Free Documentation License2908
 
 End Tag Table
