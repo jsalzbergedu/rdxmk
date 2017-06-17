@@ -160,11 +160,6 @@ Otherwise, returns nil."
 
 (defun rdxmk-depollute-cond ()
   "If `rdxmk-lockfile-no-pollute` is t, inhibit backups for the buffer and set `create-lockfiles` and `auto-save-default` to nil when `rdxmk-redox-mode` is run."
-  ;; (if (rdxmk-lockfile-no-pollute)
-  ;;     ((rdxmk-reminder-message)
-  ;;      (setq auto-save-default nil)
-  ;;      (set (make-local-variable 'backup-inhibited) t))
-  ;;   '()))
   (if rdxmk-lockfile-no-pollute
       (progn
 	(rdxmk-reminder-message)
