@@ -61,7 +61,7 @@ This manual is for rdxmk, version 0.10.
 @pindex Make and Cookbook
 @cindex Make and Cookbook
 
-Run @command{M-x make-narg RET} to go up to the root makefile and run make without arguments, @command{M-x make-warg RET} to go up to the root makefile and run make with the specified arguments, @command{M-x make-qemu RET} to go up to the root makefile and run make qemu, and @command{M-x cookbook RET} to run cookbook with the specified package and options. All of these can be run from a buffer on a file anywhere in the redox project, as long as the root redox project has not been renamed and as long as you haven't manually @command{cd}d to another file.
+Run @command{M-x rdxmk-make-narg RET} to go up to the root makefile and run make without arguments, @command{M-x rdxmk-make-warg RET} to go up to the root makefile and run make with the specified arguments, @command{M-x rdxmk-make-qemu RET} to go up to the root makefile and run make qemu, and @command{M-x rdxmk-cookbook RET} to run cookbook with the specified package and options. All of these can be run from a buffer on a file anywhere in the redox project, as long as the root redox project has not been renamed and as long as you haven't manually @command{cd}d to another file.
 
 
 @node Redox mode
@@ -72,9 +72,9 @@ Run @command{M-x make-narg RET} to go up to the root makefile and run make witho
 
 A minor mode run whenever a text file is opened inside a redox project. You can flip it on and off manually, but I don't see any uses for that. This currently exists for two reasons: firstly to give people an option to conditionally stop emacs from messing up the redox build system, and secondly so there is a hook for people to do cool stuff with.
 
-For the first purpose, do @command{M-x customize-group RET rdxmk RET} and set lockfile no pollute to non-nil. Now whenever you open a file in redox, it wont insert lockfiles, backups, and auto-saves everywhere. However, to get lockfiles in other locations, you must manually @command{M-x set-variable RET create-lockfiles RET t RET} to reset it to t. It stinks.
+For the first purpose, do @command{M-x customize-group RET rdxmk RET} and set lockfile no pollute to non-nil. Now whenever you open a file in redox, it wont insert backups and auto-saves everywhere. However, it does not set create-lockfiles to nil, because that is a variable that should be changed using customize (@command{M-x customize-group RET files RET}). If create lockfiles is non nil, and you have set lockfile no pollute to non nil, it will display a message at the bottom of the screen to remind you to turn it off. I'd reccomend just setting it for the current session, as lockfiles are nice for other projects. 
 
-Perhaps you could use it to bind keys for using the make/build stuff, but no keys are bound so as to not conflict with anyone else's setups.
+Perhaps you could use rdxmk-redox-mode to bind keys for using the make/build stuff, but no keys are bound so as to not conflict with anyone else's setups.
 
 @node GNU Free Documentation License
 @appendix GNU Free Documentation License
