@@ -51,7 +51,7 @@ This manual is for rdxmk, version 0.10.
 
 @menu
 * Make and Cookbook:: Building redox from emacs.
-* Redox mode:: A minor mode.
+* Redox Mode:: A minor mode.
 * GNU Free Documentation License::
 @end menu
 
@@ -64,11 +64,13 @@ This manual is for rdxmk, version 0.10.
 Run @command{M-x rdxmk-make-narg RET} to go up to the root makefile and run make without arguments, @command{M-x rdxmk-make-warg RET} to go up to the root makefile and run make with the specified arguments, @command{M-x rdxmk-make-qemu RET} to go up to the root makefile and run make qemu, and @command{M-x rdxmk-cookbook RET} to run cookbook with the specified package and options. All of these can be run from a buffer on a file anywhere in the redox project, as long as the root redox project has not been renamed and as long as you haven't manually @command{cd}d to another file.
 
 
-@node Redox mode
-@chapter Redox mode
+@node Redox Mode
+@chapter Redox Mode
 
 @pindex Redox Mode
-@cindex Redox mode
+@cindex Redox Mode
+
+To get Redox Mode to flip on and off automatically, add @command{(rdxmk-global-mode t)} to your @code{.emacs}.
 
 A minor mode run whenever a text file is opened inside a redox project. You can flip it on and off manually, but I don't see any uses for that. This currently exists for two reasons: firstly to give people an option to conditionally stop emacs from messing up the redox build system, and secondly so there is a hook for people to do cool stuff with.
 

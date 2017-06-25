@@ -34,40 +34,24 @@
 
 ;;; Code:
 
-(defun rdxmk-up-a-dir (dir)
-  "Helper function to return the directory one up from DIR."
-  ;; As far as I can tell, this is the idiomatic way to
-  ;; "traverse a filesystem tree," even though the built in
-  ;; docs have those two functions in switched places.
-  (file-name-directory (directory-file-name dir)))
+ (defun rdxmk-get-closest-pathname (&optional file)
+  "By default, RDXMK-GET-CLOSEST-PATHNAME will find the closest makefile. If FILE is specified, search for FILE in the same way."
+  (if file
+      (locate-dominating-file (or buffer-file-name default-directory) file)
+      (locate-dominating-file (or buffer-file-name default-directory) "Makefile")))
 
-
-(defun rdxmk-recurse-for-file (file dir)
-  "Will call itself FILE or until DIR is found or has a length of 1.
-If DIR has a length of 1 and FILE is not found, returns nil.
-If FILE is found, returns the directory and file."
-  (if (= (length dir) 1)
-      (if (file-exists-p (expand-file-name file dir))
-	  (expand-file-name file dir)
-	'())
-    (if (file-exists-p (expand-file-name file dir))
-	(expand-file-name file dir)
-      (rdxmk-recurse-for-file file (rdxmk-up-a-dir dir)))))
-
-(defun rdxmk-get-closest-pathname (&optional file)
- "By default, RDXMK-GET-CLOSEST-PATHNAME will find the closest makefile.
-Will recursivley go up to parent directories.
-If FILE is specified, searches for FILE in the same way."
- (if file
-     (rdxmk-recurse-for-file file default-directory) ; recurse until it finds FILE goes here
-     (rdxmk-recurse-for-file "Makefile" default-directory))) ; recurse until it finds Makefile goes here
+(defun rdxmk-shell-get-closest (&optional file)
+  "RDXMK-SHELL-GET-CLOSEST will find the closest makefile, and run 'SHELL-QUOTE-ARGUMENT' on it.  If FILE is specified, search for FILE in the same way."
+  (if file
+      (shell-quote-argument (rdxmk-get-closest-pathname file))
+    (shell-quote-argument (rdxmk-get-closest-pathname))))
 
 (defun rdxmk-make-qemu ()
   "Go up to the root makefile of the redox project, run make qemu."
   (interactive)
   (shell-command
    (concat
-    "make -C " (substring (rdxmk-get-closest-pathname "Makefile") 0 -8) " qemu &")
+    "make -C " (rdxmk-shell-get-closest) " qemu &")
    (get-buffer-create "*Redox Build Output*")
    (get-buffer "*Redox Build Output*")))
 
@@ -76,7 +60,7 @@ If FILE is specified, searches for FILE in the same way."
   (interactive)
   (shell-command
    (concat
-    "make -C " (substring (rdxmk-get-closest-pathname "Makefile") 0 -8) " all &")
+    "make -C " (rdxmk-shell-get-closest) " all &")
    (get-buffer-create "*Redox Build Output*")
    (get-buffer "*Redox Build Output*")))
 
@@ -86,7 +70,7 @@ If FILE is specified, searches for FILE in the same way."
   (interactive)
   (shell-command
    (concat
-    "make -C " (substring (rdxmk-get-closest-pathname "Makefile") 0 -8) " &")
+    "make -C " (rdxmk-shell-get-closest) " &")
    (get-buffer-create "*Redox Build Output*")
    (get-buffer "*Redox Build Output*")))
 
@@ -96,7 +80,7 @@ If FILE is specified, searches for FILE in the same way."
   (interactive "sType argument to pass to make: ")
   (shell-command
    (concat
-    "make -C " (substring (rdxmk-get-closest-pathname "Makefile") 0 -8) " " arg " &")
+    "make -C " (rdxmk-shell-get-closest) " " (shell-quote-argument arg) " &")
    (get-buffer-create "*Redox Build Output*")
    (get-buffer "*Redox Build Output*")))
 
@@ -120,7 +104,7 @@ version"
   (interactive "sPackage: \nsOption: ")
   (shell-command
    (concat
-    (substring (rdxmk-get-closest-pathname "Makefile") 0 -8) "/rdxmk-cookbook/cook.sh " package " " op " &")
+    (rdxmk-shell-get-closest) "/rdxmk-cookbook/cook.sh " package " " op " &")
    (get-buffer-create "*Rdxmk-Cookbook Output*")
    (get-buffer "*Rdxmk-Cookbook Output*")))
 
@@ -130,6 +114,11 @@ version"
   " redox-mode ";; shows redox-mode on the mode line
   nil) ;; redox-mode does not have a keymap
   
+(define-globalized-minor-mode rdxmk-global-mode ;; A mode to enable rdxmk-redox-mode
+  rdxmk-redox-mode ;; the minor mode that rdxmk-global-mode turns on
+  rdxmk-redox-togg-cond) ;; called on every buffer, will turn on rdxmk-redox-mode when
+;; appropriate
+
 (defun rdxmk-redox-togg-cond ()
   "Toggle `rdxmk-redox-mode` on if a file being visited is under redox/."
   (if (string-match
@@ -138,12 +127,9 @@ version"
      (rdxmk-redox-mode 1)
     (rdxmk-redox-mode 0)))
 
-(add-hook 'text-mode-hook 'rdxmk-redox-togg-cond)
-(add-hook 'after-change-major-mode-hook 'rdxmk-redox-togg-cond)
-
 ;;;###autoload
 (defgroup rdxmk nil
-  "rdxmk's customization group"
+  "Tools for redox development"
   :group 'programming)
 
 (defcustom rdxmk-lockfile-no-pollute nil

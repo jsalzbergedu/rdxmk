@@ -28,11 +28,11 @@ This manual is for rdxmk, version 0.10.
 * Menu:
 
 * Make and Cookbook:: Building redox from emacs.
-* Redox mode:: A minor mode.
+* Redox Mode:: A minor mode.
 * GNU Free Documentation License::
 
 
-File: rdxmk.info,  Node: Make and Cookbook,  Next: Redox mode,  Prev: Top,  Up: Top
+File: rdxmk.info,  Node: Make and Cookbook,  Next: Redox Mode,  Prev: Top,  Up: Top
 
 1 Make and Cookbook
 *******************
@@ -48,12 +48,15 @@ not been renamed and as long as you haven't manually 'cd'd to another
 file.
 
 
-File: rdxmk.info,  Node: Redox mode,  Next: GNU Free Documentation License,  Prev: Make and Cookbook,  Up: Top
+File: rdxmk.info,  Node: Redox Mode,  Next: GNU Free Documentation License,  Prev: Make and Cookbook,  Up: Top
 
-2 Redox mode
+2 Redox Mode
 ************
 
-A minor mode run whenever a text file is opened inside a redox
+To get Redox Mode to flip on and off automatically, add
+'(rdxmk-global-mode t)' to your '.emacs'.
+
+   A minor mode run whenever a text file is opened inside a redox
 project.  You can flip it on and off manually, but I don't see any
 uses for that.  This currently exists for two reasons: firstly to give
 people an option to conditionally stop emacs from messing up the redox
@@ -75,7 +78,7 @@ make/build stuff, but no keys are bound so as to not conflict with
 anyone else's setups.
 
 
-File: rdxmk.info,  Node: GNU Free Documentation License,  Prev: Redox mode,  Up: Top
+File: rdxmk.info,  Node: GNU Free Documentation License,  Prev: Redox Mode,  Up: Top
 
 Appendix A GNU Free Documentation License
 *****************************************
@@ -571,7 +574,7 @@ permit their use in free software.
 Tag Table:
 Node: Top708
 Node: Make and Cookbook965
-Node: Redox mode1639
-Node: GNU Free Documentation License2908
+Node: Redox Mode1639
+Node: GNU Free Documentation License3010
 
 End Tag Table
