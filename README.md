@@ -12,6 +12,8 @@ Install the documentation with
 ```bash
 install-info ~/.emacs.d/rdxmk/rdxmk.info /usr/share/info/dir
 ```
+Or if `/usr/share/info/dir` does not exist, another directory that shows up at the beginning
+of the `Info-directory-list` when you describe it with `C-h v`.
 
 For more documentation, see the info entry with `C-h i` under rdxmk.
 
