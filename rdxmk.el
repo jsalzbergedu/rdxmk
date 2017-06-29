@@ -34,17 +34,13 @@
 
 ;;; Code:
 
- (defun rdxmk-get-closest-pathname (&optional file)
+(defun rdxmk-get-closest-pathname (&optional file)
   "By default, RDXMK-GET-CLOSEST-PATHNAME will find the closest makefile. If FILE is specified, search for FILE in the same way."
-  (if file
-      (locate-dominating-file (or buffer-file-name default-directory) file)
-      (locate-dominating-file (or buffer-file-name default-directory) "Makefile")))
+  (locate-dominating-file (or buffer-file-name default-directory) (or file "Makefile")))
 
 (defun rdxmk-shell-get-closest (&optional file)
   "RDXMK-SHELL-GET-CLOSEST will find the closest makefile, and run 'SHELL-QUOTE-ARGUMENT' on it.  If FILE is specified, search for FILE in the same way."
-  (if file
-      (shell-quote-argument (rdxmk-get-closest-pathname file))
-    (shell-quote-argument (rdxmk-get-closest-pathname))))
+  (shell-quote-argument (rdxmk-get-closest-pathname file)))
 
 (defun rdxmk-make-qemu ()
   "Go up to the root makefile of the redox project, run make qemu."
@@ -111,9 +107,9 @@ version"
 (define-minor-mode rdxmk-redox-mode
   "Redox mode - adds a hook for working with redox projects."
   nil ;; redox-mode is must be set true to be on
-  " redox-mode ";; shows redox-mode on the mode line
+  " redox";; shows redox-mode on the mode line
   nil) ;; redox-mode does not have a keymap
-  
+
 (define-globalized-minor-mode rdxmk-global-mode ;; A mode to enable rdxmk-redox-mode
   rdxmk-redox-mode ;; the minor mode that rdxmk-global-mode turns on
   rdxmk-redox-togg-cond) ;; called on every buffer, will turn on rdxmk-redox-mode when
@@ -124,7 +120,7 @@ version"
   (if (string-match
        (regexp-quote "redox/")
        default-directory)
-     (rdxmk-redox-mode 1)
+      (rdxmk-redox-mode 1)
     (rdxmk-redox-mode 0)))
 
 ;;;###autoload
@@ -146,12 +142,10 @@ Otherwise, returns nil."
 
 (defun rdxmk-depollute-cond ()
   "If `rdxmk-lockfile-no-pollute` is t, inhibit backups for the buffer, set `auto-save-default` to nil, and tell the user to set `create-lockfiles` to nil when `rdxmk-redox-mode` is run."
-  (if rdxmk-lockfile-no-pollute
-      (progn
-	(rdxmk-reminder-message)
-	(setq auto-save-default nil)
-	(set (make-local-variable 'backup-inhibited) t))
-    '()))
+  (when rdxmk-lockfile-no-pollute
+    (rdxmk-reminder-message)
+    (set (make-local-variable 'auto-save-default) nil)
+    (set (make-local-variable 'backup-inhibited) t)))
 
 (add-hook 'rdxmk-redox-mode 'rdxmk-depollute-cond)
 
