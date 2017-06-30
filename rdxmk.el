@@ -35,7 +35,7 @@
 ;;; Code:
 
 (defun rdxmk-get-closest-pathname (&optional file)
-  "By default, RDXMK-GET-CLOSEST-PATHNAME will find the closest makefile. If FILE is specified, search for FILE in the same way."
+  "By default, RDXMK-GET-CLOSEST-PATHNAME will find the closest makefile.  If FILE is specified, search for FILE in the same way."
   (locate-dominating-file (or buffer-file-name default-directory) (or file "Makefile")))
 
 (defun rdxmk-shell-get-closest (&optional file)
@@ -107,7 +107,7 @@ version"
 (define-minor-mode rdxmk-redox-mode
   "Redox mode - adds a hook for working with redox projects."
   nil ;; redox-mode is must be set true to be on
-  " redox";; shows redox-mode on the mode line
+  " redox";; shows redox on the mode line
   nil) ;; redox-mode does not have a keymap
 
 (define-globalized-minor-mode rdxmk-global-mode ;; A mode to enable rdxmk-redox-mode
